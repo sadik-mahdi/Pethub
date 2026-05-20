@@ -9,6 +9,15 @@ const PetDetailsPage = async ({ params }) => {
   const res = await fetch(`http://localhost:5000/pet/${id}`, { cache: "no-store" });
   const pet = await res.json();
 
+  if (!pet) {
+  return (
+    <div className="min-h-screen bg-[#0F172A] text-white flex flex-col items-center justify-center gap-4">
+      <h2 className="text-2xl font-bold text-slate-300">Pet Profile Not Found</h2>
+      <p className="text-slate-500 text-sm">The ID requested does not match any entry in our system.</p>
+    </div>
+  );
+}
+
   const {
     petName,
     imageUrl,

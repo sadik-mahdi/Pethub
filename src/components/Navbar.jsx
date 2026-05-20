@@ -58,9 +58,11 @@ const Navbar = () => {
 
        {/* {user? ( 
         <> */}
-          <Button className="bg-orange-500 text-white font-semibold px-6">
-            Login
-          </Button>
+          <Link href="signup">
+            <Button className="bg-orange-500 text-white font-semibold px-6">
+              Sign Up
+            </Button>
+          </Link>
         {/* </>)
         :
         (
