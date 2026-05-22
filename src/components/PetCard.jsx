@@ -70,13 +70,11 @@ const PetCard = ({pet}) => {
             </span>
           </div>
         </div>
-
-        {/* DESCRIPTION */}
+        
         <p className="text-sm text-gray-400 line-clamp-2 h-10">
           {description}
         </p>
 
-        {/* ACTIONS */}
         <div className="pt-4 border-t  flex gap-3">
           <Link href={`/pets/${_id}`}>
             <Button

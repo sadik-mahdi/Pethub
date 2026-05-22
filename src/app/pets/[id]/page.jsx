@@ -2,35 +2,22 @@ import { Calendar, Dna, DollarSign, HeartPulse, MapPin, PawPrint, ShieldCheck, U
 import Image from "next/image";
 import PetRequestForm from "@/components/PetRequestForm";
 
-
 const PetDetailsPage = async ({ params }) => {
-  const { id } = await params;
+  const { id } = await  params;
 
-  const res = await fetch(`http://localhost:5000/pet/${id}`, { cache: "no-store" });
+  const res = await fetch(`http://localhost:5000/pet/${id}`);
   const pet = await res.json();
 
-  if (!pet) {
-  return (
-    <div className="min-h-screen bg-[#0F172A] text-white flex flex-col items-center justify-center gap-4">
-      <h2 className="text-2xl font-bold text-slate-300">Pet Profile Not Found</h2>
-      <p className="text-slate-500 text-sm">The ID requested does not match any entry in our system.</p>
-    </div>
-  );
-}
+  const {petName,imageUrl,species,vaccinationStatus,breed,age,gender,healthStatus,location,adoptionFee,description} = pet;
 
-  const {
-    petName,
-    imageUrl,
-    species,
-    vaccinationStatus,
-    breed,
-    age,
-    gender,
-    healthStatus,
-    location,
-    adoptionFee,
-    description
-  } = pet;
+//   if (!pet) {
+//   return (
+//     <div className="min-h-screen bg-[#0F172A] text-white flex flex-col items-center justify-center gap-4">
+//       <h2 className="text-2xl font-bold text-slate-300">Pet Profile Not Found</h2>
+//       <p className="text-slate-500 text-sm">The ID requested does not match any entry in our system.</p>
+//     </div>
+//   );
+// }
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white py-10 px-4 md:px-8">

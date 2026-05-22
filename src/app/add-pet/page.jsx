@@ -120,15 +120,14 @@ const AddPet = () => {
               <div className="md:col-span-2">
                 <TextField name="imageUrl" isRequired>
                   <Label>Image URL</Label>
+
                   <Input
                     type="url"
                     name="imageUrl"
-                    placeholder="https://i.ibb.co/your-image.jpg"
+                    placeholder="https://example.com/image.jpg"
                     className="rounded-2xl"
-                    // This pattern forces links to start with either ibb.co or postimg.cc variants
-                    pattern="https:\/\/(i\.)?ibb\.co\/.*|https:\/\/(i\.)?postimg\.cc\/.*"
-                    title="Please provide a valid direct link from ImgBB (ibb.co) or PostImage (postimg.cc)"
                   />
+
                   <FieldError />
                 </TextField>
               </div>
