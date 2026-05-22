@@ -1,8 +1,6 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
-import { mongodbAdapter } from '@better-auth/mongo-adapter';
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
-import { betterAuth } from 'better-auth';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -31,20 +29,7 @@ const SignUpPage = () => {
     }
   };
 
-  const auth = betterAuth({
-    database: mongodbAdapter(db),
-    emailAndPassword: {  
-        enabled: true
-    },
-    socialProviders: {
-        google: {
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        },
-    },
-});
-
-  const handleGoogleSignIn = async(e) => {
+  const handleGoogleSignIn = async() => {
       await authClient.signIn.social({
       provider: "google",
     });
@@ -161,13 +146,10 @@ const SignUpPage = () => {
               <div className="flex-1 border-t border-slate-300"></div>
             </div>
 
-            {/* --- GOOGLE SIGN UP BUTTON --- */}
             <Button 
               onClick={handleGoogleSignIn}
-              type="button"
               className="w-full bg-white text-slate-700 font-bold border border-slate-300 px-6 py-2 rounded-xl hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-3"
             >
-              
               <FcGoogle />Sign Up with Google
             </Button>
 
