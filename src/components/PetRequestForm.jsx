@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, DateField, Form, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const PetRequestForm = ({pet}) => {
 
@@ -43,7 +44,7 @@ const PetRequestForm = ({pet}) => {
     })
 
     const data = await res.json();
-    console.log(data);
+    toast.success('Adoption request sent successfully');
 
   }
 
