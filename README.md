@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pet Hub - Pet Adoption Platform
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+Pet Hub is a pet adoption platform built to connect pet owners and animal lovers in one place. Users can browse available pets, learn about them in detail, and submit adoption requests. Pet owners can manage their listings and review adoption requests through a simple and user-friendly dashboard.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live URL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Live Site: **[Add Your Live Website Link Here]**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+* User registration and login with secure authentication
+* Browse all available pets with detailed information
+* Search pets by name and filter pets by species
+* Submit adoption requests for available pets
+* Manage personal adoption requests from the dashboard
+* Add, update, and delete pet listings
+* Approve or reject adoption requests as a pet owner
+* Responsive design for mobile, tablet, and desktop devices
+* Protected routes for authenticated users
+* Custom 404 page and loading spinner for better user experience
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## NPM Packages Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Client Side
 
-## Deploy on Vercel
+* next
+* react
+* react-dom
+* tailwindcss
+* @heroui/react
+* lucide-react
+* axios
+* react-hot-toast
+* react-icons
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Server Side
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* express
+* mongodb
+* cors
+* dotenv
+* cookie-parser
+* jsonwebtoken
+* better-auth
+
+---
+
+## Project Name
+
+**Pet Hub - Pet Adoption Platform**
