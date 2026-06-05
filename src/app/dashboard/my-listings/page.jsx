@@ -127,7 +127,7 @@ const MyListingsPage = async () => {
                     size="sm"
                     className="w-full border-white/10 text-slate-300 text-xs font-semibold rounded-xl hover:bg-white/5 flex items-center justify-center gap-1.5"
                   >
-                    <Edit3 size={14} /> Edit
+                    <Edit3 size={14} />Edit
                   </Button>
                 </Link>
 
