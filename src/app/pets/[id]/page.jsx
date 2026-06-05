@@ -3,12 +3,38 @@ import Image from "next/image";
 import PetRequestForm from "@/components/PetRequestForm";
 
 const PetDetailsPage = async ({ params }) => {
-  const { id } = await  params;
+  const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/pet/${id}`);
+const res = await fetch(`http://localhost:5000/pet/${id}`, {
+    cache: "no-store",
+    next: { revalidate: 0 } // Extra layer to completely bypass the App Router cache matrix
+  });
   const pet = await res.json();
 
-  const {petName,imageUrl,species,vaccinationStatus,breed,age,gender,healthStatus,location,adoptionFee,description} = pet;
+  if (!pet || Object.keys(pet).length === 0) {
+    return (
+      <div className="min-h-screen bg-[#0F172A] text-white flex flex-col items-center justify-center gap-4">
+        <h2 className="text-2xl font-bold text-red-400">Pet Profile Not Found</h2>
+        <p className="text-slate-400 text-sm">
+          The server could not find any records matching ID: <span className="font-mono text-white bg-slate-800 px-2 py-1 rounded">{id}</span>
+        </p>
+      </div>
+    );
+  }
+
+ const {
+    petName,
+    imageUrl,
+    species,
+    vaccinationStatus,
+    breed,
+    age,
+    gender,
+    healthStatus,
+    location,
+    adoptionFee,
+    description
+  } = pet;
 
 //   if (!pet) {
 //   return (
@@ -160,7 +186,7 @@ const PetDetailsPage = async ({ params }) => {
             <h3 className="text-xl font-bold mb-2">Request to Adopt {petName}</h3>
             <p className="text-slate-400 text-xs mb-4">Fill out this form and the owner will review your request.</p>
             
-            <div className="text-slate-500 text-center py-10 border border-dashed border-white/10 rounded-2xl">
+            <div className="text-slate-500 text-center border border-dashed border-white/10 rounded-2xl">
               <PetRequestForm pet={pet}/>
             </div>
           </div>

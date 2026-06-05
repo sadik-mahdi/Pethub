@@ -20,6 +20,8 @@ const AddPet = () => {
 
     const data = await res.json();
     console.log(data);
+    toast('A new pet Added');
+
     
   }
 
@@ -28,12 +30,12 @@ const AddPet = () => {
       <div><h2 className=" text-orange-400 font-bold text-4xl pt-10 text-center ">Add Pet</h2></div>
       <form className="p-10 space-y-8" onSubmit={onSubmit}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-orange-500">
 
               {/* pet Name */}
               <div className="md:col-span-2">
                 <TextField name="petName" isRequired>
-                  <Label>Pet Name</Label>
+                  <Label className='text-white'>Pet Name</Label>
                   <Input placeholder="Enter Your Pet Name" className="rounded-2xl" />
                   <FieldError />
                 </TextField>
@@ -47,7 +49,7 @@ const AddPet = () => {
                   className="w-full"
                   placeholder="Select Species"
                 >
-                  <Label>Species</Label>
+                  <Label className='text-white'>Species</Label>
                   <Select.Trigger className="rounded-2xl">
                     <Select.Value />
                     <Select.Indicator />
@@ -77,13 +79,13 @@ const AddPet = () => {
 
               {/* Breed */}
               <TextField name="breed" >
-                <Label>Breed</Label>
+                <Label className='text-white'>Breed</Label>
                 <Input placeholder="breed" className="rounded-2xl" />
                 <FieldError />
               </TextField>
 
               <TextField name="age" >
-                <Label>Age</Label>
+                <Label className='text-white'>Age</Label>
                 <Input placeholder="Age" className="rounded-2xl" />
                 <FieldError />
               </TextField>
@@ -96,7 +98,7 @@ const AddPet = () => {
                   className="w-full"
                   placeholder="Select Species"
                 >
-                  <Label>Gender</Label>
+                  <Label className='text-white'>Gender</Label>
                   <Select.Trigger className="rounded-2xl">
                     <Select.Value />
                     <Select.Indicator />
@@ -119,7 +121,7 @@ const AddPet = () => {
               {/* Image URL - Removed preview */}
               <div className="md:col-span-2">
                 <TextField name="imageUrl" isRequired>
-                  <Label>Image URL</Label>
+                  <Label className='text-white'>Image URL</Label>
 
                   <Input
                     type="url"
@@ -134,7 +136,7 @@ const AddPet = () => {
 
               {/* Health Status */}
               <TextField name="healthStatus" >
-                <Label>Health Status</Label>
+                <Label className='text-white'>Health Status</Label>
                 <Input placeholder="Good/Average/Bad" className="rounded-2xl" />
                 <FieldError />
               </TextField>
@@ -147,7 +149,7 @@ const AddPet = () => {
                   className="w-full"
                   placeholder="Select Vaccination Status"
                 >
-                  <Label>Vaccination Status</Label>
+                  <Label className='text-white'>Vaccination Status</Label>
                   <Select.Trigger className="rounded-2xl">
                     <Select.Value />
                     <Select.Indicator />
@@ -169,7 +171,7 @@ const AddPet = () => {
 
               {/* location */}
               <TextField name="location" >
-                <Label>Location</Label>
+                <Label className='text-white'>Location</Label>
                 <Input
                   placeholder="Location"
                   className="rounded-2xl"
@@ -179,7 +181,7 @@ const AddPet = () => {
 
               {/* adoption fee */}
               <TextField name="adoptionFee" type="adoption-fee" isRequired>
-                <Label>Adoption Fee</Label>
+                <Label className='text-white'>Adoption Fee</Label>
                 <Input
                   type="number"
                   placeholder="Fee"
@@ -191,7 +193,7 @@ const AddPet = () => {
               {/* Description */}
               <div className="md:col-span-2">
                 <TextField name="description" isRequired>
-                  <Label>Description</Label>
+                  <Label className='text-white'>Description</Label>
                   <TextArea
                     placeholder="Describe the travel experience..."
                     className="rounded-3xl"
@@ -202,7 +204,7 @@ const AddPet = () => {
 
               {/* Duration */}
               <TextField name="OwnerEmail" isRequired>
-                <Label>Email</Label>
+                <Label className='text-white'>Email</Label>
                 <Input
                   placeholder="demo@gmail.com"
                   className="rounded-2xl"
@@ -219,7 +221,7 @@ const AddPet = () => {
             >
               Add pet
             </Button>
-          </form>
+      </form>
     </div>
   );
 };

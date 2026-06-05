@@ -3,7 +3,7 @@ import React from 'react';
 
 const allPetsPage = async() => {
   const res = await fetch(`http://localhost:5000/pet`)
-    const pets = await res.json();
+  const pets = await res.json();
 
   return (
     <div>

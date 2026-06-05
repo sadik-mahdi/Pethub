@@ -21,6 +21,7 @@ const SignUpPage = () => {
       image:user.image,
       password:user.password
     });
+    
     if(data){
       redirect('/');
     }

@@ -9,8 +9,6 @@ const Navbar = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  console.log("Navbar session user status:", user);
-
   const handleSignOut = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -47,22 +45,23 @@ const Navbar = () => {
               My Requests
             </Link>
           </li>
-          <li>
-            <Link href="/add-pet" className="hover:text-orange-500 transition duration-200">
-              Add Pet
-            </Link>
-          </li>
+          <Link 
+            href="/dashboard/add-pet" 
+            className="text-sm font-semibold hover:text-orange-500 transition-colors"
+          >
+            Add Pet
+          </Link>
         </ul>
 
         {user ? (
   <div className="flex items-center gap-4 list-none">
-    
     <Dropdown>
       <Dropdown.Trigger>
-        <Button 
-          type="button" 
+        <div 
+          role="button" 
+          tabIndex={0}
           aria-label="User Profile Menu"
-          className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer bg-transparent border-0 p-0 focus:outline-none"
+          className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none"
         >
           <Avatar className="w-10 h-10 border bg-slate-100 shrink-0">
             <Avatar.Image referrerPolicy="no-referrer" src={user?.image} />
@@ -74,8 +73,9 @@ const Navbar = () => {
           <div className="w-10 h-10 rounded-full border border-orange-600 bg-orange-500 text-white font-black flex items-center justify-center shadow-sm shrink-0">
             {user?.name?.charAt(0).toUpperCase()}
           </div>
+          
           <IoIosArrowDropdown className="text-slate-600 w-5 h-5 transition-transform" />
-        </Button>
+        </div>
       </Dropdown.Trigger>
 
       <Dropdown.Popover>
@@ -106,7 +106,7 @@ const Navbar = () => {
     </Dropdown>
 
   </div>
-): (
+          ): (
           <div className="flex items-center gap-3">
             <Link href='/signup'>
               <Button className="bg-orange-500 text-white font-semibold px-6 rounded-xl">

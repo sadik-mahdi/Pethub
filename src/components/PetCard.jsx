@@ -75,20 +75,15 @@ const PetCard = ({pet}) => {
           {description}
         </p>
 
-        <div className="pt-4 border-t  flex gap-3">
+        <div className="pt-4 border-t ">
           <Link href={`/pets/${_id}`}>
             <Button
               variant="bordered"
-              className="flex-1 rounded-xl border-white/10 text-white hover:bg-white/10 text-sm h-10"
+              className="flex-1 rounded-xl border-white/10 bg-cyan-500 text-white hover:bg-white/10 text-sm h-10"
             >
               View Details
             </Button> 
           </Link>
-            <Link href='/adoption'>
-              <Button className="flex-1 rounded-xl  text-white font-semibold text-sm h-10">
-                Adopt Now
-              </Button>
-            </Link>
         </div>
       </div>
     </div>
