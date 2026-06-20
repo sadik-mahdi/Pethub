@@ -6,8 +6,8 @@ const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
 
 const res = await fetch(`http://localhost:5000/pet/${id}`, {
-    cache: "no-store",
-    next: { revalidate: 0 } // Extra layer to completely bypass the App Router cache matrix
+    // cache: "no-store",
+    next: { revalidate: 0 }
   });
   const pet = await res.json();
 

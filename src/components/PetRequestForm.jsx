@@ -32,7 +32,6 @@ const PetRequestForm = ({pet}) => {
       petId : pet._id,
       petName : pet.petName,
       pickUpDate : new Date(pickUpDate)
-
     }
 
     const res = await fetch(`http://localhost:5000/request`,{
@@ -82,7 +81,7 @@ const PetRequestForm = ({pet}) => {
                         <Input readOnly placeholder= {user?.email} />
                       </TextField>
 
-                      <DateField className="w-[256px]" name="date" onChange={setPickUpDate}>
+                      <DateField name="date" onChange={setPickUpDate} variant="secondary">
                         <Label>Preferred Pickup Date</Label>
                         <DateField.Group>
                           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>

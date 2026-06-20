@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Eye } from "lucide-react";
+import { CancelAdoptionRequest } from "@/components/CancelAdoptionRequest";
 
 const MyRequestsPage = async () => {
   const session = await auth.api.getSession({
@@ -20,7 +21,7 @@ const MyRequestsPage = async () => {
 
   let requests = [];
   try {
-    const res = await fetch(`http://localhost:5000/request/${user.id}`, { cache: "no-store" });
+    const res = await fetch(`http://localhost:5000/request/${user?.id}`);
     if (res.ok) {
       requests = await res.json();
     }
@@ -44,7 +45,6 @@ const MyRequestsPage = async () => {
 
   return (
     <div className='max-w-6xl mx-auto px-2 text-slate-100 space-y-8'>
-      
       {/* Header section */}
       <div className='space-y-2'>
         <span className='text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full border border-pink-500/20 font-semibold inline-block'>
@@ -120,16 +120,17 @@ const MyRequestsPage = async () => {
                           {request.status || "Pending"}
                         </span>
                       </td>
-                      <td className="py-4 px-6 text-right">
-                        <Link href={`/pets/${request.petId}`} className="inline-block">
+                      <td className="py-4 px-4 text-center flex items-center justify-between gap-2">
+                        <Link href={`/pets/${request.petId}`} className="">
                           <Button 
                             variant="bordered" 
                             size="sm"
-                            className='border-white/10 text-slate-300 text-xs font-semibold rounded-xl hover:bg-white/10 flex items-center gap-1.5'
+                            className='border-white/10 text-slate-300 text-xs font-semibold rounded-xl hover:bg-white/10 flex items-center'
                           >
                             <Eye size={14} /> View
                           </Button>
                         </Link>
+                        <CancelAdoptionRequest requestId={request._id} />
                       </td>
                     </tr>
                   );
