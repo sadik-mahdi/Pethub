@@ -41,7 +41,27 @@ const AllPetsPage = async ({ searchParams }) => {
         </div>
 
         {/* 🐾 FILTER BUTTONS */}
-        
+        <div className="flex gap-3 flex-wrap">
+          {["Dog", "Cat", "Bird", "Others"].map((sp) => (
+            <a
+              key={sp}
+              href={`?species=${sp}${search ? `&search=${search}` : ""}`}
+              className={`px-4 py-2 border rounded transition ${
+                species === sp ? "bg-black text-white" : "hover:bg-gray-100"
+              }`}
+            >
+              {sp}
+            </a>
+          ))}
+
+          {/* RESET */}
+          <Link
+            href="/pets"
+            className="px-4 py-2 border rounded bg-red-500 text-white"
+          >
+            Reset
+          </Link>
+        </div>
       </form>
 
       {/* 🐶 PET GRID */}
