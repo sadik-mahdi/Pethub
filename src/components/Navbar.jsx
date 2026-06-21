@@ -41,7 +41,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/my-requests" className="hover:text-orange-500 transition duration-200">
+            <Link href="/dashboard/my-requests" className="hover:text-orange-500 transition duration-200">
               My Requests
             </Link>
           </li>
@@ -54,58 +54,58 @@ const Navbar = () => {
         </ul>
 
         {user ? (
-  <div className="flex items-center gap-4 list-none">
-    <Dropdown>
-      <Dropdown.Trigger>
-        <div 
-          role="button" 
-          tabIndex={0}
-          aria-label="User Profile Menu"
-          className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none"
-        >
-          <Avatar className="w-10 h-10 border bg-slate-100 shrink-0">
-            <Avatar.Image referrerPolicy="no-referrer" src={user?.image} />
-            <Avatar.Fallback className="text-slate-700 font-bold">
-              {user?.name?.charAt(0).toUpperCase()}
-            </Avatar.Fallback>
-          </Avatar>
+          <div className="flex items-center gap-4 list-none">
+            <Dropdown>
+              <Dropdown.Trigger>
+                <div 
+                  role="button" 
+                  tabIndex={0}
+                  aria-label="User Profile Menu"
+                  className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none"
+                >
+                  <Avatar className="w-10 h-10 border bg-slate-100 shrink-0">
+                    <Avatar.Image referrerPolicy="no-referrer" src={user?.image} />
+                    <Avatar.Fallback className="text-slate-700 font-bold">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </Avatar.Fallback>
+                  </Avatar>
 
-          <div className="w-10 h-10 rounded-full border border-orange-600 bg-orange-500 text-white font-black flex items-center justify-center shadow-sm shrink-0">
-            {user?.name?.charAt(0).toUpperCase()}
+                  <div className="w-10 h-10 rounded-full border border-orange-600 bg-orange-500 text-white font-black flex items-center justify-center shadow-sm shrink-0">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </div>
+                  
+                  <IoIosArrowDropdown className="text-slate-600 w-5 h-5 transition-transform" />
+                </div>
+              </Dropdown.Trigger>
+
+              <Dropdown.Popover>
+                <Dropdown.Menu className="bg-orange-500 text-white"
+                  onAction={(key) => {
+                    if (key === "logout") {
+                      handleSignOut();
+                    } else {
+                      console.log(`Selected action: ${key}`);
+                    }
+                  }}
+                >
+                  <Dropdown.Item id="new-file" textValue="New file">
+                    <Label className="text-white">{user.name} {user.email}</Label>
+                  </Dropdown.Item>
+                  
+                  <Dropdown.Item id="dashboard" textValue="Dashboard" 
+                    as={Link}
+                      href="/dashboard">
+                    <Label>Dashboard</Label>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item id="logout" textValue="Delete file" variant="danger">
+                    <Label className="text-red-600 font-semibold">Logout</Label>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
+
           </div>
-          
-          <IoIosArrowDropdown className="text-slate-600 w-5 h-5 transition-transform" />
-        </div>
-      </Dropdown.Trigger>
-
-      <Dropdown.Popover>
-        <Dropdown.Menu className="bg-orange-500 text-white"
-          onAction={(key) => {
-            if (key === "logout") {
-              handleSignOut();
-            } else {
-              console.log(`Selected action: ${key}`);
-            }
-          }}
-        >
-          <Dropdown.Item id="new-file" textValue="New file">
-            <Label className="text-white">{user.name} {user.email}</Label>
-          </Dropdown.Item>
-          
-          <Dropdown.Item id="dashboard" textValue="Dashboard" 
-            as={Link}
-              href="/dashboard">
-            <Label>Dashboard</Label>
-          </Dropdown.Item>
-
-          <Dropdown.Item id="logout" textValue="Delete file" variant="danger">
-            <Label className="text-red-600 font-semibold">Logout</Label>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown.Popover>
-    </Dropdown>
-
-  </div>
           ): (
           <div className="flex items-center gap-3">
             <Link href='/signup'>

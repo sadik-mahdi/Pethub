@@ -7,8 +7,12 @@ const PetDetailsPage = async ({ params }) => {
 
 const res = await fetch(`http://localhost:5000/pet/${id}`, {
     // cache: "no-store",
-    next: { revalidate: 0 }
-  });
+    next: { revalidate: 0 },
+    headers : {
+      authorization : "logged in"
+    }
+  }
+);
   const pet = await res.json();
 
   if (!pet || Object.keys(pet).length === 0) {
