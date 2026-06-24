@@ -1,30 +1,40 @@
 import { Calendar, Dna, DollarSign, HeartPulse, MapPin, PawPrint, ShieldCheck, User2 } from "lucide-react";
 import Image from "next/image";
 import PetRequestForm from "@/components/PetRequestForm";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-const res = await fetch(`http://localhost:5000/pet/${id}`, {
-    // cache: "no-store",
-    next: { revalidate: 0 },
-    headers : {
-      authorization : "logged in"
-    }
-  }
-);
-  const pet = await res.json();
+  const tokenObj = await auth.api.getToken({
+    headers: await headers()
+  });
 
-  if (!pet || Object.keys(pet).length === 0) {
+  const rawToken = tokenObj?.token;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pet/${id}`, {
+    cache: 'no-store',
+    headers: {
+      // 3. Send the actual string token, or fallback gracefully if not logged in
+      authorization: rawToken ? `Bearer ${rawToken}` : "none"                                                                    
+    }
+  });
+
+  if (!res.ok) {
+    const errorLog = await res.json();
     return (
       <div className="min-h-screen bg-[#0F172A] text-white flex flex-col items-center justify-center gap-4">
-        <h2 className="text-2xl font-bold text-red-400">Pet Profile Not Found</h2>
+        <h2 className="text-2xl font-bold text-red-400">Authentication Error</h2>
         <p className="text-slate-400 text-sm">
-          The server could not find any records matching ID: <span className="font-mono text-white bg-slate-800 px-2 py-1 rounded">{id}</span>
+          Server responded with: <span className="font-mono text-white bg-red-900/40 px-2 py-1 rounded">{errorLog.message || "Forbidden"}</span>
         </p>
+        <p className="text-xs text-slate-500">Please verify you are logged in correctly.</p>
       </div>
     );
   }
+
+  const pet = await res.json();
 
  const {
     petName,
@@ -39,6 +49,10 @@ const res = await fetch(`http://localhost:5000/pet/${id}`, {
     adoptionFee,
     description
   } = pet;
+
+  const safeImage = imageUrl && imageUrl.trim() !== ""
+  ? imageUrl
+  : "/placeholder.png";
 
 //   if (!pet) {
 //   return (
@@ -55,14 +69,13 @@ const res = await fetch(`http://localhost:5000/pet/${id}`, {
       
         <div className="lg:col-span-2 space-y-8">
           <div className="relative h-100 w-full overflow-hidden rounded-3xl bg-slate-800">
-            <Image 
-              src={imageUrl || "/assets/placeholder.png"} 
-              alt={petName} 
-              fill
+            <Image src={safeImage} 
+              alt={petName || "Pet image"} 
+              fill 
+              required
               unoptimized
-              priority
               className="object-cover"
-            />
+            />  
             <span className="absolute top-4 right-4 bg-[#10B981] text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-sm">
               Available
             </span>

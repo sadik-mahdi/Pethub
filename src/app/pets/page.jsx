@@ -10,7 +10,7 @@ const AllPetsPage = async ({ searchParams }) => {
   if (species) queryParams.append("species", species);
 
   const res = await fetch(
-    `http://localhost:5000/pet?${queryParams.toString()}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/pet?${queryParams.toString()}`,
     {
       cache: "no-store",
     },
@@ -20,12 +20,8 @@ const AllPetsPage = async ({ searchParams }) => {
 
   return (
     <div className="container mx-auto max-w-7xl p-6">
-      {/* 🏷️ TITLE */}
       <h1 className="text-4xl font-bold mb-6">All Pets</h1>
-
-      {/* 🔍 SEARCH + FILTER UI */}
       <form method="GET" className="space-y-5 mb-10">
-        {/* SEARCH BOX */}
         <div className="flex gap-3">
           <input
             type="text"

@@ -3,11 +3,12 @@ import { authClient } from '@/lib/auth-client';
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Changed from 'redirect'
+import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
 const SignUpPage = () => {
+  const router = useRouter(); // Initialize the router hook
 
   const onSubmit = async(e) => {
     e.preventDefault();
@@ -15,26 +16,28 @@ const SignUpPage = () => {
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
     
-    const {data , error} = await authClient.signUp.email({
+    const { data, error } = await authClient.signUp.email({
       email: user.email,
       name: user.name,
-      image:user.image,
-      password:user.password
+      image: user.image,
+      password: user.password
     });
     
-    if(data){
-      redirect('/');
+    if (data) {
+      router.push('/'); // Clean client-side navigation redirect
     }
-    if(error){
-      alert('error');
+    if (error) {
+      alert(error.message || 'An error occurred during signup');
     }
   };
 
-  const handleGoogleSignIn = async() => {
-      await authClient.signIn.social({
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/", // Tells Google where to send the user back to
     });
-  }
+  };
+
 
   return (
     <div className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex items-center justify-center p-6 relative"
@@ -169,6 +172,6 @@ const SignUpPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SignUpPage;

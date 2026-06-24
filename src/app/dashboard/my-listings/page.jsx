@@ -8,7 +8,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 
 const MyListingsPage = async () => {
-  const res = await fetch(`http://localhost:5000/pet`, { cache: "no-store" });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pet`, { cache: "no-store" });
   const listings = await res.json();
 
   const totalListings = listings?.length || 0;

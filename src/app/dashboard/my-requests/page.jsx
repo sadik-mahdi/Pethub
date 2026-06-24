@@ -10,6 +10,10 @@ const MyRequestsPage = async () => {
     headers: await headers()
   });
 
+  const {token} = await auth.api.getToken({
+    headers : await headers(),
+  })
+
   const user = session?.user;
   if (!user) {
     return (
@@ -21,7 +25,11 @@ const MyRequestsPage = async () => {
 
   let requests = [];
   try {
-    const res = await fetch(`http://localhost:5000/request/${user?.id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/${user?.id}`, {
+      headers : {
+        authorization : `Bearer ${token}`
+      }
+    });
     if (res.ok) {
       requests = await res.json();
     }

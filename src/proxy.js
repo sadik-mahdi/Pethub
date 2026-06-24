@@ -9,8 +9,13 @@ export async function proxy(request) {
   if(!session){
     return NextResponse.redirect(new URL('/login', request.url))
   }
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard','/pets/:path','/my-requests','/dashboard/add-pet']
-}
+  matcher: [
+    '/dashboard',
+    '/dashboard/my-requests',
+    '/dashboard/add-pet'
+  ]
+};

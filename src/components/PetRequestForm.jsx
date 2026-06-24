@@ -9,10 +9,8 @@ const PetRequestForm = ({pet}) => {
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
 
   const [pickUpDate, setPickUpDate] = useState(null);
-  console.log(new Date(pickUpDate));
   
   const {petName} = pet;
 
@@ -34,10 +32,14 @@ const PetRequestForm = ({pet}) => {
       pickUpDate : new Date(pickUpDate)
     }
 
-    const res = await fetch(`http://localhost:5000/request`,{
+    const {data:tokenData} = await authClient.token()
+    console.log(tokenData);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request`,{
       method : 'POST',
       headers : {
-        'content-type' : 'application/json'
+        'content-type' : 'application/json',
+        authorization : `Bearer ${tokenData?.token}`
       },
       body : JSON.stringify(requestData)
     })

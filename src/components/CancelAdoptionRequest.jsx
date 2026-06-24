@@ -6,7 +6,7 @@ export function CancelAdoptionRequest({requestId}) {
   console.log(requestId);
 
   const handleCancelRequest = async() => {
-    const res = await fetch(`http://localhost:5000/request/${requestId}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/${requestId}`,{
       method : "DELETE",
       headers : {
         "content-type" : "application/json"
